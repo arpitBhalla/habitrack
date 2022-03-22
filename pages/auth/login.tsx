@@ -9,10 +9,8 @@ import Paper from "@mui/material/Paper";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { supabase } from "@utils/supabaseClient";
-import Logo from "@components/common/Logo";
 import { WithProtectedPage } from "@context/Auth";
 import Tooltip from "@mui/material/Tooltip";
-import { Credit } from "@components/common/Credit";
 import Image from "next/image";
 import Grid from "@mui/material/Grid";
 

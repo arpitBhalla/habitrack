@@ -1,15 +1,10 @@
-import { useState, useEffect } from "react";
 import { WithProtectedPage, useUser } from "@context/Auth";
 import dynamic from "next/dynamic";
 
-const Dashboard = dynamic(() => import("@screens/Dashboard"));
+const Explore = dynamic(() => import("@screens/Explore"));
 
 function Home() {
-  return (
-    <>
-      <Dashboard />
-    </>
-  );
+  return <Explore />;
 }
 
 export default WithProtectedPage(Home, ["admin", "member"]);
