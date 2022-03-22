@@ -4,7 +4,7 @@ import { red, blue } from "@mui/material/colors";
 // Create a theme instance.
 const theme = createTheme({
   palette: {
-    mode: process.env.NODE_ENV === "development" ? "dark" : "light",
+    mode: "light",
     primary: {
       main: blue[500],
     },

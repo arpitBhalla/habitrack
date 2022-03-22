@@ -1,7 +1,9 @@
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@utils/supabaseClient";
 import { useRouter } from "next/router";
+import Drawer from "@layouts/Drawer";
 import React from "react";
+import Box from "@mui/material/Box";
 
 type TUserRole = {};
 const basePath = "/";
@@ -73,7 +75,13 @@ export const WithProtectedPage =
     // }, [authUser]);
 
     // return <>{loading ? <>loading</> : <Component />}</>;
-    return <Component />;
+    return (
+      <>
+        <Drawer>
+          <Component />
+        </Drawer>
+      </>
+    );
   };
 
 export const useUser = () => React.useContext(AuthContext);
