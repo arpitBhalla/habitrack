@@ -7,6 +7,8 @@ import Table from "./Table";
 import PanelBody from "./SidePanel";
 import CelebrationOutlinedIcon from "@mui/icons-material/CelebrationOutlined";
 import WhatshotOutlinedIcon from "@mui/icons-material/WhatshotOutlined";
+import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
+import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 
 export default function ActionAreaCard() {
   const [open, setOpen] = React.useState("");
@@ -19,23 +21,26 @@ export default function ActionAreaCard() {
             <Card
               title="Day Streak"
               number={"5 days"}
+              description={"You've been working hard today!"}
               Icon={WhatshotOutlinedIcon}
               color="#F76707"
             />
           </Grid>
           <Grid item md={4}>
             <Card
-              title="Day Streak"
-              number={"5 days"}
-              Icon={CelebrationOutlinedIcon}
+              title="Points"
+              number={1040}
+              description={"Rank 34 among 89 users"}
+              Icon={ControlPointDuplicateIcon}
               color="#1C7ED6"
             />
           </Grid>
           <Grid item md={4}>
             <Card
-              title="Day Streak"
-              number={"5 days"}
-              Icon={CelebrationOutlinedIcon}
+              title="Level"
+              number={"Noob"}
+              description={"You've been working hard today!"}
+              Icon={WorkspacePremiumOutlinedIcon}
               color="#F03E3E"
             />
           </Grid>
