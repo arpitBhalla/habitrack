@@ -9,8 +9,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/router";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 
-const drawerWidth = 400;
+const drawerWidth = 350;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }: any) => ({
@@ -30,30 +31,30 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   })
 );
 
-export default function PersistentDrawerRight(props) {
+export default function PersistentDrawerRight({
+  open,
+  setOpen,
+  children,
+}: {
+  open: string;
+  setOpen: React.Dispatch<React.SetStateAction<string>>;
+  children: React.ReactNode;
+}) {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+
   const router = useRouter();
   const d = (id?: string) => {
     router.query.info = ["3", id || ""];
     router.push(router);
   };
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    setOpen("");
   };
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Main open={open}>
-        <Button variant="text" color="primary" onClick={handleDrawerOpen}>
-          Open
-        </Button>
-        {props.children}
-      </Main>
+      <Main open={Boolean(open)}>{children}</Main>
       <Drawer
         sx={{
           width: drawerWidth,
@@ -65,29 +66,59 @@ export default function PersistentDrawerRight(props) {
         }}
         variant="persistent"
         anchor="right"
-        open={open}
+        open={!!open}
       >
         <Toolbar />
         <Box
           display="flex"
-          p={2}
+          pl={2}
+          pr={2}
           alignItems="center"
           justifyContent={"space-between"}
         >
           <Typography variant="h5" color="textSecondary">
-            Panel
+            <b>{open}</b>
           </Typography>
-          <IconButton
-            aria-label="close drawer"
-            onClick={() => {
-              handleDrawerClose();
-            }}
-          >
+          <IconButton aria-label="close drawer" onClick={handleDrawerClose}>
             <CloseIcon />
           </IconButton>
         </Box>
-        <div>Panel</div>
+        <Grid sx={{ p: 2 }} container spacing={2}>
+          <Grid item xs={12}>
+            <Card title={"0 day"} caption={"Current Streak"} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card title={"0 day"} caption={"Complete"} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card title={"0 day"} caption={"Failed"} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card title={"0 day"} caption={"Skipped"} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card title={"0 day"} caption={"Total"} />
+          </Grid>
+        </Grid>
       </Drawer>
     </Box>
   );
 }
+
+const Card = ({ children, title, caption }: any) => {
+  return (
+    <Box sx={{ border: "1px solid #ccc", p: 1, pl: 2, borderRadius: 1 }}>
+      <Typography
+        variant="caption"
+        sx={{ textTransform: "uppercase" }}
+        color="text.secondary"
+      >
+        <b>{caption}</b>
+      </Typography>
+      <Typography variant="body1" color="text.primary">
+        <b>{title}</b>
+      </Typography>
+      {children}
+    </Box>
+  );
+};

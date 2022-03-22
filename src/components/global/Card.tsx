@@ -41,7 +41,15 @@ export const CardWrapper = ({ children }: any) => (
   </Card>
 );
 
-export default function ActionAreaCard() {
+interface CardProps {
+  title?: string;
+  number?: string | number;
+  description?: string;
+  Icon?: typeof MailIcon;
+  color?: string;
+}
+
+export default function ActionAreaCard(props: CardProps) {
   return (
     <CardWrapper>
       <CardContent>
@@ -53,9 +61,9 @@ export default function ActionAreaCard() {
           }}
         >
           <Typography variant="body2" color="text.secondary">
-            <b>Title</b>
+            <b>{props.title}</b>
           </Typography>
-          <CardIcon />
+          <CardIcon Icon={props.Icon} color={props.color} />
         </Box>
         <Typography
           gutterBottom
@@ -63,10 +71,14 @@ export default function ActionAreaCard() {
           color="text.primary"
           component="div"
         >
-          <b>{Number(1999).toLocaleString()}</b>
+          <b>
+            {typeof props.number === "number"
+              ? Number(props.number).toLocaleString()
+              : props.number}
+          </b>
         </Typography>
         <Typography variant="caption" color="text.secondary">
-          31.2% more than average users
+          {props.description}
         </Typography>
       </CardContent>
     </CardWrapper>

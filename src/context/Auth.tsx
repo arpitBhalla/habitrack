@@ -55,7 +55,7 @@ export const WithProtectedPage =
     nonAuthPage = false
   ) =>
   () => {
-    // const router = useRouter();
+    const router = useRouter();
     // const { authUser } = React.useContext(AuthContext);
     // const [loading, setLoading] = React.useState(true);
     // React.useEffect(() => {
@@ -75,6 +75,7 @@ export const WithProtectedPage =
     // }, [authUser]);
 
     // return <>{loading ? <>loading</> : <Component />}</>;
+    if (router.pathname.includes("auth")) return <Component />;
     return (
       <>
         <Drawer>

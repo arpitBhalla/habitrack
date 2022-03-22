@@ -39,7 +39,7 @@ export default function ImgMediaCard() {
             setArticles(data);
             setLoading(false);
             resolve("");
-          }, 4000)
+          }, 2000)
         );
       });
   }, []);
