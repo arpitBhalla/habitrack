@@ -1,9 +1,10 @@
-import { basePath } from "site.config";
-import { TUserRole } from "@type/types";
 import { User } from "@supabase/supabase-js";
 import { supabase } from "@utils/supabaseClient";
 import { useRouter } from "next/router";
 import React from "react";
+
+type TUserRole = {};
+const basePath = "/";
 
 type TAuthState = User | undefined | null;
 
