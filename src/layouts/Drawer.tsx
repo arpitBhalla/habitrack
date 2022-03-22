@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useRouter } from "next/router";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -23,6 +24,10 @@ import Avatar from "@mui/material/Avatar";
 import NotificationIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import Tooltip from "@mui/material/Tooltip";
 import Container from "@mui/material/Container";
+import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import SpaOutlinedIcon from "@mui/icons-material/SpaOutlined";
+import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
+import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 
 const drawerWidth = 240;
 
@@ -100,6 +105,8 @@ export default function MiniDrawer(props: any) {
   const theme = useTheme();
   const { authUser } = useUser();
   const [open, setOpen] = React.useState(false);
+  const router = useRouter();
+  console.log(router.pathname);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -156,10 +163,13 @@ export default function MiniDrawer(props: any) {
         </DrawerHeader>
 
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          {links.map(({ Icon, name, path }, index) => (
             <ListItem
+              onClick={() => {
+                router.push(path);
+              }}
               sx={
-                index === 2
+                router.pathname === path
                   ? {
                       borderLeft: `3px solid ${theme.palette.primary.main}`,
                       backgroundColor: theme.palette.primary.main + "20",
@@ -168,12 +178,12 @@ export default function MiniDrawer(props: any) {
                   : { borderLeft: `4px solid transparent`, paddingLeft: 1.5 }
               }
               button
-              key={text}
+              key={name}
             >
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <Icon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={name} />
             </ListItem>
           ))}
         </List>
@@ -190,5 +200,31 @@ export default function MiniDrawer(props: any) {
     </Box>
   );
 }
+type LinkT = {
+  path: string;
+  name: string;
+  Icon: typeof MailIcon;
+};
 
-const links = {};
+const links: LinkT[] = [
+  {
+    path: "/",
+    name: "Home",
+    Icon: DashboardOutlinedIcon,
+  },
+  {
+    path: "/explore",
+    name: "Explore",
+    Icon: ExploreOutlinedIcon,
+  },
+  {
+    path: "/pomodoro",
+    name: "Pomodoro",
+    Icon: SpaOutlinedIcon,
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    Icon: PermIdentityOutlinedIcon,
+  },
+];
