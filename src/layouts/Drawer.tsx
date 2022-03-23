@@ -28,7 +28,7 @@ import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import SpaOutlinedIcon from "@mui/icons-material/SpaOutlined";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
-
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -128,17 +128,18 @@ export default function MiniDrawer(props: any) {
               component="div"
               sx={{ flexGrow: 1 }}
             >
-              Code Chronicles
+              {/* Code Chronicles */}
             </Typography>
+            <IconButton sx={{ mr: 2 }} aria-label="" onClick={() => {}}>
+              <Badge badgeContent={4} color="primary">
+                <NotificationIcon color="action" />
+              </Badge>
+            </IconButton>
             <Chip
+              variant="outlined"
               label={authUser?.user_metadata?.full_name || "Your Name"}
               onClick={() => {}}
             />
-            <IconButton aria-label="" onClick={() => {}}>
-              <Badge badgeContent={4} color="primary">
-                <NotificationIcon />
-              </Badge>
-            </IconButton>
           </Toolbar>
         </Container>
       </AppBar>
@@ -146,12 +147,7 @@ export default function MiniDrawer(props: any) {
         sx={{
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            boxShadow: `  0.7px 0px 2.2px rgba(0, 0, 0, 0.02),
-            1.8px 0px 5.3px rgba(0, 0, 0, 0.028),
-            3.4px 0px 10px rgba(0, 0, 0, 0.035),
-            6px 0px 17.9px rgba(0, 0, 0, 0.042),
-            11.3px 0px 33.4px rgba(0, 0, 0, 0.05),
-            27px 0px 80px rgba(0, 0, 0, 0.07)`,
+            boxShadow: ` rgba(0, 0, 0, 0.2) 0px 18px 50px -10px`,
             boxSizing: "border-box",
           },
         }}
@@ -162,7 +158,7 @@ export default function MiniDrawer(props: any) {
           <Avatar alt="Remy Sharp" src="/images/man.png" />
         </DrawerHeader>
 
-        <List>
+        <List sx={{ flexGrow: 1 }}>
           {links.map(({ Icon, name, path }, index) => (
             <ListItem
               onClick={() => {
@@ -180,9 +176,11 @@ export default function MiniDrawer(props: any) {
               button
               key={name}
             >
-              <ListItemIcon>
-                <Icon />
-              </ListItemIcon>
+              <Tooltip title={name} placement="right">
+                <ListItemIcon>
+                  <Icon />
+                </ListItemIcon>
+              </Tooltip>
               <ListItemText primary={name} />
             </ListItem>
           ))}
@@ -219,12 +217,17 @@ const links: LinkT[] = [
   },
   {
     path: "/pomodoro",
-    name: "Pomodoro",
+    name: "Focus Mode",
     Icon: SpaOutlinedIcon,
   },
   {
-    path: "/profile",
-    name: "Profile",
+    path: "/tasks",
+    name: "Work To Do",
+    Icon: TaskAltIcon,
+  },
+  {
+    path: "/social",
+    name: "Leaderboard",
     Icon: PermIdentityOutlinedIcon,
   },
 ];

@@ -10,6 +10,10 @@ import { NewsArticle } from "@type/NewsArticle";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Skeleton from "@mui/material/Skeleton";
+import TextField from "@mui/material/TextField";
+import { CardWrapper } from "@components/global/Card";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
 
 export const ArticleSkeleton = () => {
   return (
@@ -39,51 +43,81 @@ export default function ImgMediaCard() {
             setArticles(data);
             setLoading(false);
             resolve("");
-          }, 2000)
+          }, 1000)
         );
       });
   }, []);
 
-  if (isLoading)
-    return (
-      <Container maxWidth="xl">
+  return (
+    <>
+      {/* <Typography variant="h4" color="initial">
+        <b>Explore</b>
+      </Typography> */}
+      <Container maxWidth="md">
         <Grid container spacing={2}>
-          {[...new Array(12)].map((_, index) => (
-            <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
-              <ArticleSkeleton />
-            </Grid>
-          ))}
+          <Grid item xs={12}>
+            <CardWrapper>
+              <Box p={2}>
+                <Stack direction="row" spacing={2}>
+                  <Avatar>A</Avatar>
+                  {/* <Typography variant="body1" color="text.primary">
+                  <b>Arpit</b>
+                </Typography> */}
+                  <TextField
+                    fullWidth
+                    multiline
+                    sx={{ pb: 2 }}
+                    rows={3}
+                    size="small"
+                    margin="dense"
+                    id=""
+                    placeholder="Something in your mind ..."
+                    variant="outlined"
+                  />
+                </Stack>
+                <Box display="flex" justifyContent={"end"}>
+                  <Button size="small" variant="contained" color="primary">
+                    Post
+                  </Button>
+                  <Button size="small" variant="text" color="primary">
+                    Cancel
+                  </Button>
+                </Box>
+              </Box>
+            </CardWrapper>
+          </Grid>
+          {isLoading
+            ? [...new Array(12)].map((_, index) => (
+                <Grid key={index} item xs={12} md={6}>
+                  <ArticleSkeleton />
+                </Grid>
+              ))
+            : articles.map((article: NewsArticle) => (
+                <Grid item xs={12} md={6} key={article.url}>
+                  <Card>
+                    <CardMedia
+                      component="img"
+                      alt={article.title}
+                      height="140"
+                      image={article.urlToImage}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="body2" component="div">
+                        <b>{article.title}</b>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {article.description?.slice(0, 100)}...
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small">Share</Button>
+                      <Button size="small">Learn More</Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
         </Grid>
       </Container>
-    );
-  return (
-    <Container maxWidth="xl">
-      <Grid container spacing={2}>
-        {articles.map((article: NewsArticle) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={article.url}>
-            <Card>
-              <CardMedia
-                component="img"
-                alt={article.title}
-                height="140"
-                image={article.urlToImage}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="body2" component="div">
-                  <b>{article.title}</b>
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {article.description?.slice(0, 100)}...
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    </>
   );
 }

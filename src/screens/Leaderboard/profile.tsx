@@ -10,11 +10,6 @@ import { useRouter } from "next/router";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import StaticDatePicker from "@mui/lab/StaticDatePicker";
-
 import {
   BarChart,
   Bar,
@@ -28,51 +23,6 @@ import {
 } from "recharts";
 
 const drawerWidth = 350;
-
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }: any) => ({
@@ -160,25 +110,7 @@ export default function PersistentDrawerRight({
           <Grid item xs={12} md={6}>
             <Card title={"0 day"} caption={"Total"} />
           </Grid>
-          <Grid item xs={12}>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <StaticDatePicker
-                displayStaticWrapperAs="desktop"
-                // openTo="year"
-                // value={value}
-                onChange={(newValue) => {
-                  // setValue(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-          </Grid>
-          <Grid item xs={12}>
-            <BarChart width={250} height={180} data={data}>
-              <Bar dataKey="uv" fill={theme.palette.primary.main} />
-              <Tooltip />
-            </BarChart>
-          </Grid>
+          <Grid item xs={12}></Grid>
         </Grid>
       </Drawer>
     </Box>

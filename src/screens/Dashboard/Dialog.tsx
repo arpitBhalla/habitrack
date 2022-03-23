@@ -10,6 +10,12 @@ import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import Autocomplete from "@mui/material/Autocomplete";
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
+import MenuItem from "@mui/material/MenuItem";
+import TimePicker from "@mui/lab/TimePicker";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 export default function FormDialog() {
   const [open, setOpen] = React.useState(false);
@@ -39,27 +45,119 @@ export default function FormDialog() {
         <DialogTitle>Add a habit</DialogTitle>
         <DialogContent>
           <DialogContentText></DialogContentText>
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            fullWidth
-            options={habits}
-            sx={{ width: 300 }}
-            renderInput={(params) => (
-              <TextField
-                margin="dense"
-                variant="standard"
-                {...params}
-                label="Habit Name"
+          <Grid container spacing={1}>
+            <Grid xs={12} item>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                fullWidth
+                options={habits}
+                renderInput={(params) => (
+                  <TextField
+                    margin="dense"
+                    variant="outlined"
+                    {...params}
+                    label="Habit Name"
+                    size="small"
+                  />
+                )}
               />
-            )}
-          />
-          <TextField
-            fullWidth
-            margin="dense"
-            variant="standard"
-            label="Habit Name"
-          />
+            </Grid>
+            <Grid xs={2} item>
+              <TextField
+                fullWidth
+                type={"number"}
+                margin="dense"
+                size="small"
+                variant="outlined"
+                label="Goal"
+                value={1}
+              />
+            </Grid>
+            <Grid xs={3} item>
+              <TextField
+                fullWidth
+                select
+                margin="dense"
+                size="small"
+                variant="outlined"
+                label="Goal Quantity"
+                value="times"
+              >
+                <MenuItem value="times">times</MenuItem>
+                <MenuItem>minutes</MenuItem>
+              </TextField>
+            </Grid>
+            <Grid xs={3} item>
+              <TextField
+                fullWidth
+                select
+                margin="dense"
+                size="small"
+                variant="outlined"
+                label="Interval"
+                value="Per Day"
+              >
+                <MenuItem value="Per Day">Per Day</MenuItem>
+                <MenuItem>Per Week</MenuItem>
+                <MenuItem>Per Month</MenuItem>
+              </TextField>
+            </Grid>
+            <Grid xs={4} item>
+              <TextField
+                fullWidth
+                select
+                margin="dense"
+                size="small"
+                variant="outlined"
+                label="Repeat"
+              >
+                <MenuItem value="daily">Daily</MenuItem>
+                <MenuItem>Weekly</MenuItem>
+                <MenuItem>Monthly</MenuItem>
+                <MenuItem>Yearly</MenuItem>
+              </TextField>
+            </Grid>
+            <Grid xs={7} item>
+              <TextField
+                fullWidth
+                select
+                margin="dense"
+                size="small"
+                variant="outlined"
+                label="Time of day"
+              >
+                <MenuItem value="daily">Morning</MenuItem>
+                <MenuItem>Afternoon</MenuItem>
+                <MenuItem>Evening</MenuItem>
+                <MenuItem>Night</MenuItem>
+              </TextField>
+            </Grid>
+            <Grid xs={5} item>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <TimePicker
+                  variant="outlined"
+                  label="Time of day"
+                  // value={value}
+                  onChange={() => {}}
+                  renderInput={(params) => (
+                    <TextField margin="dense" size="small" {...params} />
+                  )}
+                />
+              </LocalizationProvider>
+            </Grid>
+            <Grid xs={12} item>
+              <TextField
+                fullWidth
+                label="Remainder"
+                margin="dense"
+                size="small"
+                variant="outlined"
+                multiline
+                rows={2}
+              />
+            </Grid>
+          </Grid>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
