@@ -27,7 +27,7 @@ export default function ActionAreaCard() {
   }, []);
   return (
     <Grid container spacing={3}>
-      <Grid item md={4}>
+      <Grid item sm={4}>
         <Card
           title="Day Streak"
           number={(userData?.streak || "0") + " days"}
@@ -36,7 +36,7 @@ export default function ActionAreaCard() {
           color="#F76707"
         />
       </Grid>
-      <Grid item md={4}>
+      <Grid item sm={4}>
         <Card
           title="Points"
           number={userData?.points || 0}
@@ -45,7 +45,7 @@ export default function ActionAreaCard() {
           color="#1C7ED6"
         />
       </Grid>
-      <Grid item md={4}>
+      <Grid item sm={4}>
         <Card
           title="Pending Tasks"
           number={"4 "}

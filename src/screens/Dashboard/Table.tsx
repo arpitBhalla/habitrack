@@ -34,7 +34,7 @@ export default function BasicTable(props: {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.habits?.map((row) => (
+            {props.habits?.map?.((row) => (
               <TableRow
                 onClick={() => {
                   props?.onClick?.(row.name);

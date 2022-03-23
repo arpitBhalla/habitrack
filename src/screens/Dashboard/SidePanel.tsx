@@ -18,6 +18,7 @@ import WhatshotOutlinedIcon from "@mui/icons-material/WhatshotOutlined";
 
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import Calendar from "./Calendar";
 
 import {
   BarChart,
@@ -92,7 +93,7 @@ export default function PersistentDrawerRight({
           "& .MuiDrawer-paper": {
             width: drawerWidth,
           },
-          zIndex: theme.zIndex.appBar - 1,
+          zIndex: theme.zIndex.appBar - 100,
         }}
         variant="persistent"
         anchor="right"
@@ -137,19 +138,7 @@ export default function PersistentDrawerRight({
           <Grid item xs={12} md={6}>
             <Card title={"0 day"} caption={"Total"} />
           </Grid>
-          <Grid item xs={12}>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <StaticDatePicker
-                displayStaticWrapperAs="desktop"
-                // openTo="year"
-                // value={value}
-                onChange={(newValue) => {
-                  // setValue(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-          </Grid>
+          <Calendar />
           <Grid item xs={12}>
             <BarChart width={280} height={180} data={data}>
               <Bar dataKey="avg" fill={theme.palette.primary.main} />

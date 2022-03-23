@@ -38,11 +38,12 @@ function getGreeting() {
 export default function ActionAreaCard() {
   const [open, setOpen] = React.useState("");
   const [habits, setHabits] = React.useState<habit[]>([]);
+  const [loading, setLoading] = React.useState(true);
   const { authUser } = useUser();
 
   const saveHabit = async (newHabit: habit) => {
     setHabits((oldHabits) => [...oldHabits, newHabit]);
-    const { data, error: createError } = await supabase
+    const { data, error } = await supabase
       .from("userProfiles")
       .update({ habits: JSON.stringify([...habits, newHabit]) })
       .match({ id: authUser?.id });
@@ -58,11 +59,13 @@ export default function ActionAreaCard() {
       setHabits(habits);
       console.log(habits);
     }
+    setLoading(false);
   };
   React.useEffect(() => {
     fetchHabits();
   }, []);
-  if (habits.length === 0)
+
+  if (loading)
     return (
       <Container maxWidth="xl">
         <Grid container spacing={4}>
@@ -89,7 +92,7 @@ export default function ActionAreaCard() {
         </Grid>
       </Container>
     );
-  if (process.env.NODE_ENV !== "development")
+  if (habits.length === 0)
     return (
       <Container maxWidth="xl">
         <Grid
@@ -140,7 +143,7 @@ export default function ActionAreaCard() {
       <PanelBody open={open} setOpen={setOpen}>
         <Stats />
         <Grid sx={{ mt: 2 }} container spacing={3}>
-          <Grid item md={8}>
+          <Grid item sm={8}>
             <Typography variant="h6" color="text.secondary">
               <IconButton>
                 <ChevronLeftIcon />
@@ -172,11 +175,11 @@ export default function ActionAreaCard() {
               }}
             />
           </Grid>
-          <Grid item md={4}>
+          <Grid item sm={4}>
             <CardWrapper>
-              {/* <Typography sx={{ m: 2 }} variant="body2" color="text.secondary">
+              <Typography sx={{ m: 2 }} variant="body2" color="text.secondary">
                 <b>Progress</b>
-              </Typography> */}
+              </Typography>
 
               <Box p={2}>
                 <Chart />

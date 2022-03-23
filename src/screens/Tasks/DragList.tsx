@@ -95,9 +95,10 @@ function DragList() {
 export default DragList;
 
 const DroppableStyles = styled.div`
-  padding: 10px;
+  padding: 18px;
   border-radius: 6px;
-  background: #eee;
+  /* background: #; */
+  border: 1px solid #ccc;
 `;
 
 const DraggableElement = ({ prefix, elements }) => (
@@ -135,14 +136,22 @@ const ListItem = ({ item, index }: any) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            <Card sx={{ p: 2, m: 1 }}>
-              <Typography variant="body1" color="">
+            <Box
+              sx={{
+                p: 2,
+                m: 1,
+                borderRadius: 1,
+                // border: "1px solid #ccc",
+                borderLeft: "4px solid blue",
+              }}
+            >
+              <Typography variant="body1" color="text.primary">
                 <b>{randomHeader}</b>
               </Typography>
               <Typography variant="caption" color="text.secondary">
                 <b>Task Content</b>
               </Typography>
-            </Card>
+            </Box>
           </div>
         );
       }}

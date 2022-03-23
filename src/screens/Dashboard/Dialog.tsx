@@ -33,6 +33,7 @@ export default function FormDialog({
   };
 
   const handleClose = () => {
+    if (!name) return;
     setHabits({ name, actions: {} });
     setOpen(false);
   };
@@ -177,7 +178,7 @@ export default function FormDialog({
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
           <Button onClick={handleClose}>Save</Button>
         </DialogActions>
       </Dialog>
