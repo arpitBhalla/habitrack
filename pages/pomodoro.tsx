@@ -4,7 +4,11 @@ import dynamic from "next/dynamic";
 const Pomodoro = dynamic(() => import("@screens/Pomodoro"));
 
 function Home() {
-  return <Pomodoro />;
+  return (
+    <>
+      <Pomodoro />
+    </>
+  );
 }
 
 export default WithProtectedPage(Home, ["admin", "member"]);

@@ -29,7 +29,7 @@ export default function BasicTable(props: any) {
   return (
     <CardWrapper>
       <TableContainer component={Paper}>
-        <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Rank</TableCell>

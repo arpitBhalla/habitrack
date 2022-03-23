@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { WithProtectedPage, useUser } from "@context/Auth";
 import dynamic from "next/dynamic";
 import Container from "@mui/material/Container";
@@ -7,10 +7,22 @@ import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import List from "./DragList";
+import LinearProgress from "@mui/material/LinearProgress";
+import Dialog from "./Dialog";
+import { Task } from "@type/Task";
 
-const Time = ({ start, reset }) => {
-  const [time, setTime] = useState(25 * 60);
+const Drag = dynamic(() => import("./Drag"), { ssr: false });
+
+const Time = ({ totalTime = 0 }: any) => {
+  const [time, setTime] = useState(0);
+
+  const startTimer = (newTime: any) => {
+    setTime(newTime);
+  };
+
+  const resetTime = () => {
+    setTime(0);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,43 +32,84 @@ const Time = ({ start, reset }) => {
       clearInterval(interval);
     };
   }, [time]);
+
   const minutes = Math.floor(time / 60);
   const seconds = time - minutes * 60;
   return (
-    <>
-      {minutes}:{seconds}
-    </>
+    <Box>
+      <Typography
+        sx={{
+          fontSize: "6rem",
+          textAlign: "center",
+          fontWeight: "bold",
+          mb: 2,
+        }}
+        color="text.primary"
+      >
+        <b>
+          {minutes.toString().padStart(2, "0")}:
+          {seconds.toString().padStart(2, "0")}
+        </b>
+      </Typography>
+      <Box mb={4} display="flex" justifyContent="center">
+        <Button
+          variant="contained"
+          onClick={() => {
+            startTimer?.(totalTime);
+          }}
+          color="primary"
+        >
+          Start
+        </Button>
+        <Button
+          onClick={() => {
+            startTimer(0);
+          }}
+          variant="text"
+          color="primary"
+        >
+          Reset
+        </Button>
+      </Box>
+      <LinearProgress
+        variant="determinate"
+        value={((totalTime - time) * 100) / totalTime}
+        sx={{ borderRadius: 4 }}
+      />
+    </Box>
   );
 };
-
+const finalSpaceCharacters = [
+  {
+    title: "Complete Tutorial Sheet",
+    time: 1648040387850,
+    notes: "",
+    id: "0.6152774061016792",
+  },
+  {
+    title: "Get new book",
+    time: 1648036689911,
+    notes: "",
+    id: "0.2692362106688877",
+  },
+];
 function Home() {
+  const [totalTime, setTotalTime] = React.useState(25 * 60);
+  const [tasks, setTasks] = React.useState<Task[]>(finalSpaceCharacters);
   return (
     <>
-      <Container maxWidth="sm">
+      {/* <Typography variant="h4" color="initial">
+        <b>Tasks</b>
+      </Typography> */}
+      <Container maxWidth="md">
+        <Time totalTime={30} />
         <CardWrapper>
-          <CardContent>
-            <Typography
-              sx={{ fontSize: "6rem", textAlign: "center", fontWeight: "bold" }}
-              color="text.primary"
-            >
-              <b>
-                <Time />
-              </b>
-            </Typography>
-            <Box display="flex" justifyContent="center">
-              <Button variant="contained" color="primary">
-                Start
-              </Button>
-              <Button variant="text" color="primary">
-                Reset
-              </Button>
-            </Box>
-          </CardContent>
+          <Drag tasks={tasks} />
         </CardWrapper>
       </Container>
-      <List />
+      <Dialog setTasks={setTasks} />
     </>
   );
 }
 
-export default WithProtectedPage(Home, ["admin", "member"]);
+export default Home;

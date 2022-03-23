@@ -28,7 +28,7 @@ import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import SpaOutlinedIcon from "@mui/icons-material/SpaOutlined";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
-
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -221,9 +221,9 @@ const links: LinkT[] = [
     Icon: SpaOutlinedIcon,
   },
   {
-    path: "/todo",
+    path: "/tasks",
     name: "Work To Do",
-    Icon: SpaOutlinedIcon,
+    Icon: TaskAltIcon,
   },
   {
     path: "/social",
