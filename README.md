@@ -8,4 +8,4 @@
 
 ## Preview
 
-![image](https://user-images.githubusercontent.com/55053424/159647731-fba5f864-4d95-4eae-8789-3a63aece5c77.png)
+![Screenshot from 2022-03-23 17-13-16](https://user-images.githubusercontent.com/55053424/159691878-af968b12-3a87-4000-ae41-e46c983bb0a6.png)
