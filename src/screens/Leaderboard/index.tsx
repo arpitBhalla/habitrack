@@ -22,24 +22,24 @@ import {
 import Typography from "@mui/material/Typography";
 
 export default function ActionAreaCard() {
-  const [open, setOpen] = React.useState("");
+  const [open, setOpen] = React.useState("Arpit Bhalla");
 
   return (
     <Container maxWidth="xl">
-      <Typography variant="h4" color="initial">
+      <Typography sx={{ mb: 1 }} variant="h4" color="initial">
         <b>Leader Board</b>
       </Typography>
 
-      <Grid sx={{ mt: 2 }} container spacing={3}>
-        <Grid item md={7}>
-          <Table
-            onClick={(rowName: string) => {
-              setOpen(rowName);
-            }}
-          />
+      <PanelBody open={open} setOpen={setOpen}>
+        <Table
+          onClick={(rowName: string) => {
+            setOpen(rowName);
+          }}
+        />
+        <Grid sx={{ mt: 2 }} container spacing={3}>
+          <Grid item md={7}></Grid>
         </Grid>
-      </Grid>
-      <PanelBody open={open} setOpen={setOpen}></PanelBody>
+      </PanelBody>
     </Container>
   );
 }

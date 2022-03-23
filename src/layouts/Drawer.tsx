@@ -2,6 +2,7 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import AccMenu from "@components/global/Menu";
+import Notifications from "@components/global/Notifications";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
@@ -129,13 +130,9 @@ export default function MiniDrawer(props: any) {
               component="div"
               sx={{ flexGrow: 1 }}
             >
-              {/* Code Chronicles */}
+              Habitrack
             </Typography>
-            <IconButton aria-label="" onClick={() => {}}>
-              <Badge badgeContent={4} color="primary">
-                <NotificationIcon color="action" />
-              </Badge>
-            </IconButton>
+            <Notifications />
             <AccMenu />
           </Toolbar>
         </Container>
