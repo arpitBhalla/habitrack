@@ -36,7 +36,7 @@ export default function ActionAreaCard() {
         <Card
           title="Day Streak"
           number={(userData?.streak || "0") + " days"}
-          description={"Yeah"}
+          description={"Among top 34% users"}
           Icon={WhatshotOutlinedIcon}
           color="#F76707"
         />

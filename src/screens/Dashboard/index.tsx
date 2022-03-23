@@ -23,6 +23,27 @@ import Stats from "./Stats";
 const Chart = dynamic(() => import("./chart"), {
   ssr: false,
 });
+
+type actionType = "complete" | "skip" | "fail";
+type habit = {
+  name: string;
+  description?: string;
+  goal?: string;
+  remainder?: "";
+  actions: Record<string, actionType>;
+};
+
+const habits: habit[] = [
+  {
+    name: "Meditation",
+    actions: [{ "22-03-2022": "skip" }],
+  },
+  {
+    name: "Read Books",
+    actions: [{ "22-03-2022": "skip" }],
+  },
+];
+
 export default function ActionAreaCard() {
   const [open, setOpen] = React.useState("");
   const { authUser } = useUser();

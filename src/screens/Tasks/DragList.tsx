@@ -10,7 +10,7 @@ const DragDropContextContainer = styled.div`
 
 const ListGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 8px;
 `;
 
@@ -37,11 +37,16 @@ const addToList = (list, index, element) => {
   return result;
 };
 
-const lists = ["urgent", "inProgress", "done"];
+const lists = [
+  "not important",
+  "urgent & important",
+  "not important not urgent",
+  "important not urgent",
+];
 
 const generateLists = () =>
   lists.reduce(
-    (acc, listKey) => ({ ...acc, [listKey]: getItems(10, listKey) }),
+    (acc, listKey) => ({ ...acc, [listKey]: getItems(1, listKey) }),
     {}
   );
 

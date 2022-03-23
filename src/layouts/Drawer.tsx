@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useRouter } from "next/router";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import AccMenu from "@components/global/Menu";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
@@ -30,6 +31,7 @@ import SpaOutlinedIcon from "@mui/icons-material/SpaOutlined";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -104,10 +106,8 @@ const Drawer = styled(MuiDrawer, {
 
 export default function MiniDrawer(props: any) {
   const theme = useTheme();
-  const { authUser } = useUser();
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
-  console.log(router.pathname);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -131,18 +131,12 @@ export default function MiniDrawer(props: any) {
             >
               {/* Code Chronicles */}
             </Typography>
-            <IconButton sx={{ mr: 2 }} aria-label="" onClick={() => {}}>
+            <IconButton aria-label="" onClick={() => {}}>
               <Badge badgeContent={4} color="primary">
                 <NotificationIcon color="action" />
               </Badge>
             </IconButton>
-            <Chip
-              variant="outlined"
-              label={authUser?.user_metadata?.full_name || "Your Name"}
-              onClick={() => {
-                supabase.auth.signOut();
-              }}
-            />
+            <AccMenu />
           </Toolbar>
         </Container>
       </AppBar>
@@ -231,7 +225,7 @@ const links: LinkT[] = [
   {
     path: "/social",
     name: "Leaderboard",
-    Icon: PermIdentityOutlinedIcon,
+    Icon: WorkspacePremiumOutlinedIcon,
   },
   {
     path: "/profile",
