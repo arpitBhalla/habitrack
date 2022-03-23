@@ -123,7 +123,7 @@ const DraggableElement = ({ prefix, elements }) => (
 );
 
 const ListItem = ({ item, index }: any) => {
-  const randomHeader = React.useMemo(() => `lorem.generateWords(5)`, []);
+  const randomHeader = React.useMemo(() => `Task Name`, []);
 
   return (
     <Draggable draggableId={item.id} index={index}>
@@ -139,10 +139,9 @@ const ListItem = ({ item, index }: any) => {
               <Typography variant="body1" color="">
                 <b>{randomHeader}</b>
               </Typography>
-              <span>Content</span>
-              <div>
-                <span>{item.content}</span>
-              </div>
+              <Typography variant="caption" color="text.secondary">
+                <b>Task Content</b>
+              </Typography>
             </Card>
           </div>
         );

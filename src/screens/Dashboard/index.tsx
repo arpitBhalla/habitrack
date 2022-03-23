@@ -25,6 +25,14 @@ const Chart = dynamic(() => import("./chart"), {
   ssr: false,
 });
 
+function getGreeting() {
+  const hour = new Date().getHours();
+  return (
+    "Good " +
+    ((hour < 12 && "Morning") || (hour < 17 && "Afternoon") || "Evening")
+  );
+}
+
 type actionType = "complete" | "skip" | "fail";
 type habit = {
   name: string;
@@ -90,7 +98,9 @@ export default function ActionAreaCard() {
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" color="initial">
-        <b>Good Morning, {authUser?.user_metadata?.full_name || "Your Name"}</b>
+        <b>
+          {getGreeting()}, {authUser?.user_metadata?.full_name || "Your Name"}
+        </b>
       </Typography>
       <Typography sx={{ p: 1 }} variant="body1" color="text.secondary">
         <b>6hr 12 min till bedtime</b>
