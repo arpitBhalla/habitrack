@@ -16,12 +16,12 @@ import MenuItem from "@mui/material/MenuItem";
 import TimePicker from "@mui/lab/TimePicker";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import { habit } from "@type/Habit";
+import { HabitType } from "@type/Habit";
 
 export default function FormDialog({
   setHabits,
 }: {
-  setHabits: (newHabit: habit) => any;
+  setHabits: (newHabit: HabitType) => any;
 }) {
   const [open, setOpen] = React.useState(false);
 

@@ -1,5 +1,5 @@
 export type actionType = "complete" | "skip" | "fail";
-export type habit = {
+export type HabitType = {
   name: string;
   description?: string;
   goal?: string;

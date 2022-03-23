@@ -7,8 +7,6 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/router";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -72,15 +70,12 @@ export default function PersistentDrawerRight({
   children: React.ReactNode;
 }) {
   const theme = useTheme();
-
   const router = useRouter();
-  const d = (id?: string) => {
-    router.query.info = ["3", id || ""];
-    router.push(router);
-  };
 
   const handleDrawerClose = () => {
     setOpen("");
+    // router.query = {};
+    // router.push(router);
   };
 
   return (

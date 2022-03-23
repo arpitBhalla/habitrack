@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 import { useUser } from "@context/Auth";
 import { supabase } from "@utils/supabaseClient";
 
-const Chart = dynamic(() => import("./chart"), {
+const Chart = dynamic(() => import("./Chart"), {
   ssr: false,
 });
 export default function ActionAreaCard() {

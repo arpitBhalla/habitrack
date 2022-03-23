@@ -11,12 +11,18 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { CardWrapper } from "@components/global/Card";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { habit } from "@type/Habit";
+import { HabitType } from "@type/Habit";
+import { useRouter } from "next/router";
 
 export default function BasicTable(props: {
   onClick: (rowName: string) => any;
-  habits: habit[];
+  habits: HabitType[];
 }) {
+  const router = useRouter();
+  const changeQuery = (id?: string) => {
+    router.query.habit = id;
+    router.push(router);
+  };
   return (
     <CardWrapper>
       <TableContainer component={Paper}>
@@ -38,6 +44,7 @@ export default function BasicTable(props: {
               <TableRow
                 onClick={() => {
                   props?.onClick?.(row.name);
+                  // changeQuery(row.name);
                 }}
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
