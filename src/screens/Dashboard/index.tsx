@@ -16,17 +16,19 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import dynamic from "next/dynamic";
+import { useUser } from "@context/Auth";
 
 const Chart = dynamic(() => import("./chart"), {
   ssr: false,
 });
 export default function ActionAreaCard() {
   const [open, setOpen] = React.useState("");
+  const { authUser } = useUser();
 
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" color="initial">
-        <b>Good Morning, Arpit</b>
+        <b>Good Morning, {authUser?.user_metadata?.full_name || "Your Name"}</b>
       </Typography>
       <Typography sx={{ p: 1 }} variant="body1" color="text.secondary">
         <b>6hr 12 min till bedtime</b>

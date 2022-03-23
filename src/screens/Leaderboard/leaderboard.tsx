@@ -11,7 +11,7 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { CardWrapper } from "@components/global/Card";
 import Box from "@mui/material/Box";
 
-function createData(name: string, points: boolean, rank: boolean) {
+function createData(name: string, points: number, rank: number) {
   return {
     name,
     points,
@@ -20,9 +20,9 @@ function createData(name: string, points: boolean, rank: boolean) {
 }
 
 const rows = [
-  createData("Meditation", true, false),
-  createData("Read Book", false, true),
-  createData("Gym", true, false),
+  createData("Arpit Bhalla", 1020, false),
+  createData("Akshat Kumar", 908, true),
+  createData("Karan", 807, false),
 ];
 
 export default function BasicTable(props: any) {
@@ -50,7 +50,7 @@ export default function BasicTable(props: any) {
                   {rowIndex + 1}
                 </TableCell>
                 <TableCell>{row.name}</TableCell>
-                <TableCell>{row.points}</TableCell>
+                <TableCell>{Number(row.points).toLocaleString()}</TableCell>
               </TableRow>
             ))}
           </TableBody>

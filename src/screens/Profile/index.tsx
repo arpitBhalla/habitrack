@@ -10,29 +10,36 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import { supabase } from "@utils/supabaseClient";
+import { useUser } from "@context/Auth";
 
 export default function ProfileCard() {
+  const { authUser } = useUser();
+  const [name, setName] = React.useState(authUser?.user_metadata.name);
+  const [email, setEmail] = React.useState(authUser?.email);
+
+  const [profession, setProfession] = React.useState("");
+  const [gender, setGender] = React.useState("");
+  const [age, setAge] = React.useState("");
+
+  async function submitForm() {
+    return console.log({ name, email, profession, gender, age });
+
+    const { user, error } = await supabase.auth.signIn({
+      email: "example@email.com",
+    });
+  }
   return (
     <Container maxWidth="sm">
       <Grid container spacing={1}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <TextField
             margin="dense"
             size="small"
             fullWidth
             label="First Name"
-            // value={}
-            // onChange={}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            margin="dense"
-            size="small"
-            fullWidth
-            label="Last Name"
-            // value={}
-            // onChange={}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -41,35 +48,9 @@ export default function ProfileCard() {
             size="small"
             fullWidth
             label="Email"
-            // value={}
-            // onChange={}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            margin="dense"
-            size="small"
-            fullWidth
-            label="Phone Number"
-            // value={}
-            // onChange={}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            margin="dense"
-            size="small"
-            label="Habits forming stage"
-            select
-            fullWidth
-            // value={}
-            // onChange={}
-          >
-            <MenuItem value={"Beginner"}>Beginner</MenuItem>
-            <MenuItem value={"Rookie"}>Rookie</MenuItem>
-            <MenuItem value={"Amateur"}>Amateur</MenuItem>
-            <MenuItem value={"Legend"}>Legend</MenuItem>
-          </TextField>
         </Grid>
         <Grid item xs={12}>
           <TextField
@@ -78,8 +59,8 @@ export default function ProfileCard() {
             label="Profession"
             select
             fullWidth
-            // value={}
-            // onChange={}
+            value={profession}
+            onChange={(e) => setProfession(e.target.value)}
           >
             <MenuItem value={"student"}>Student</MenuItem>
             <MenuItem value={"teacher"}>Teacher</MenuItem>
@@ -94,11 +75,11 @@ export default function ProfileCard() {
             label="Gender"
             select
             fullWidth
-            // value={}
-            // onChange={}
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
           >
             <MenuItem value={"Male"}>Male</MenuItem>
-            <MenuItem value={"Femal"}>Female</MenuItem>
+            <MenuItem value={"Female"}>Female</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -108,26 +89,26 @@ export default function ProfileCard() {
             label="Age"
             select
             fullWidth
-            // value={}
-            // onChange={}
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
           >
-            <MenuItem value={"Fresher"}>16-24</MenuItem>
-            <MenuItem value={"Sophomore"}>25-32</MenuItem>
-            <MenuItem value={"Pre-Final"}>33-50</MenuItem>
-            <MenuItem value={"Final"}>{">50"}</MenuItem>
+            <MenuItem value={"16-24"}>16-24</MenuItem>
+            <MenuItem value={"25-32"}>25-32</MenuItem>
+            <MenuItem value={"33-50"}>33-50</MenuItem>
+            <MenuItem value={">50"}>{">50"}</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField
-            margin="dense"
-            size="small"
-            label="About"
+          <Button
+            sx={{ mt: 2, mb: 2 }}
             fullWidth
-            rows={3}
-            // value={}
-            // onChange={}
-            multiline
-          />
+            onClick={submitForm}
+            size={"small"}
+            variant="contained"
+            color="primary"
+          >
+            Continue
+          </Button>
         </Grid>
       </Grid>
     </Container>

@@ -50,19 +50,16 @@ export default function ImgMediaCard() {
 
   return (
     <>
-      {/* <Typography variant="h4" color="initial">
+      <Typography variant="h4" color="initial">
         <b>Explore</b>
-      </Typography> */}
+      </Typography>
       <Container maxWidth="md">
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <CardWrapper>
               <Box p={2}>
                 <Stack direction="row" spacing={2}>
                   <Avatar>A</Avatar>
-                  {/* <Typography variant="body1" color="text.primary">
-                  <b>Arpit</b>
-                </Typography> */}
                   <TextField
                     fullWidth
                     multiline
@@ -85,7 +82,7 @@ export default function ImgMediaCard() {
                 </Box>
               </Box>
             </CardWrapper>
-          </Grid>
+          </Grid> */}
           {isLoading
             ? [...new Array(12)].map((_, index) => (
                 <Grid key={index} item xs={12} md={6}>

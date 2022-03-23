@@ -20,6 +20,7 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import Chip from "@mui/material/Chip";
 import { useUser } from "@context/Auth";
+import { supabase } from "@utils/supabaseClient";
 import Avatar from "@mui/material/Avatar";
 import NotificationIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import Tooltip from "@mui/material/Tooltip";
@@ -138,7 +139,9 @@ export default function MiniDrawer(props: any) {
             <Chip
               variant="outlined"
               label={authUser?.user_metadata?.full_name || "Your Name"}
-              onClick={() => {}}
+              onClick={() => {
+                supabase.auth.signOut();
+              }}
             />
           </Toolbar>
         </Container>
