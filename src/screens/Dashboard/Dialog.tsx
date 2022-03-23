@@ -16,15 +16,24 @@ import MenuItem from "@mui/material/MenuItem";
 import TimePicker from "@mui/lab/TimePicker";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { habit } from "@type/Habit";
 
-export default function FormDialog() {
+export default function FormDialog({
+  setHabits,
+}: {
+  setHabits: (newHabit: habit) => any;
+}) {
   const [open, setOpen] = React.useState(false);
+
+  const [name, setName] = React.useState("");
+  const [remainder, setRemainder] = React.useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setHabits({ name, actions: {} });
     setOpen(false);
   };
 
@@ -52,6 +61,10 @@ export default function FormDialog() {
                 id="combo-box-demo"
                 fullWidth
                 options={habits}
+                value={name}
+                onChange={(event: any, newValue: string | null) => {
+                  if (newValue) setName(newValue);
+                }}
                 renderInput={(params) => (
                   <TextField
                     margin="dense"
@@ -136,12 +149,16 @@ export default function FormDialog() {
             <Grid xs={5} item>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <TimePicker
-                  variant="outlined"
                   label="Time of day"
                   // value={value}
                   onChange={() => {}}
                   renderInput={(params) => (
-                    <TextField margin="dense" size="small" {...params} />
+                    <TextField
+                      variant="outlined"
+                      margin="dense"
+                      size="small"
+                      {...params}
+                    />
                   )}
                 />
               </LocalizationProvider>

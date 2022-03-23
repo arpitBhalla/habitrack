@@ -11,36 +11,12 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { CardWrapper } from "@components/global/Card";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { habit } from "@type/Habit";
 
-function createData(
-  name: string,
-  monday: boolean,
-  tuesday: boolean,
-  wednesday: boolean,
-  thursday: boolean,
-  friday: boolean,
-  saturday: boolean,
-  sunday: boolean
-) {
-  return {
-    name,
-    monday,
-    tuesday,
-    wednesday,
-    thursday,
-    friday,
-    saturday,
-    sunday,
-  };
-}
-
-const rows = [
-  createData("Meditation", true, false, false, false, false, true, false),
-  createData("Read Book", false, true, false, true, false, true, false),
-  createData("Gym", true, false, false, false, false, true, false),
-];
-
-export default function BasicTable(props: any) {
+export default function BasicTable(props: {
+  onClick: (rowName: string) => any;
+  habits: habit[];
+}) {
   return (
     <CardWrapper>
       <TableContainer component={Paper}>
@@ -58,7 +34,7 @@ export default function BasicTable(props: any) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {props.habits?.map((row) => (
               <TableRow
                 onClick={() => {
                   props?.onClick?.(row.name);
@@ -69,17 +45,15 @@ export default function BasicTable(props: any) {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                {Object.values(row)
-                  .slice(1)
-                  .map((value, index) => (
-                    <TableCell align="center" key={index}>
-                      {value ? (
-                        <DoneOutlinedIcon fontSize="small" htmlColor="green" />
-                      ) : (
-                        <CloseOutlinedIcon fontSize="small" htmlColor="red" />
-                      )}
-                    </TableCell>
-                  ))}
+                {Object.values(row?.actions).map((value, index) => (
+                  <TableCell align="center" key={index}>
+                    {value === "complete" ? (
+                      <DoneOutlinedIcon fontSize="small" htmlColor="green" />
+                    ) : (
+                      <CloseOutlinedIcon fontSize="small" htmlColor="red" />
+                    )}
+                  </TableCell>
+                ))}
               </TableRow>
             ))}
           </TableBody>

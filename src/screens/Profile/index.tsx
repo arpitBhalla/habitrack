@@ -32,7 +32,7 @@ export default function ProfileCard() {
     if (!authUser?.user_metadata.acc) {
       const { data, error: createError } = await supabase
         .from("userProfiles")
-        .insert([{ streak: "0", points: 0 }]);
+        .insert([{ streak: "0", points: 0, habits: JSON.stringify([]) }]);
     }
     const { user, error } = await supabase.auth.update({
       data: { full_name: name, email, profession, gender, age, acc: true },

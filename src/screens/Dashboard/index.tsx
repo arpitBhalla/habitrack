@@ -20,6 +20,8 @@ import Image from "next/image";
 import { useUser } from "@context/Auth";
 import { supabase } from "@utils/supabaseClient";
 import Stats from "./Stats";
+import { habit } from "@type/Habit";
+import Button from "@mui/material/Button";
 
 const Chart = dynamic(() => import("./chart"), {
   ssr: false,
@@ -33,29 +35,33 @@ function getGreeting() {
   );
 }
 
-type actionType = "complete" | "skip" | "fail";
-type habit = {
-  name: string;
-  description?: string;
-  goal?: string;
-  remainder?: "";
-  actions: Record<string, actionType>;
-};
-
-const habits: habit[] = [
-  {
-    name: "Meditation",
-    actions: [{ "22-03-2022": "skip" }],
-  },
-  {
-    name: "Read Books",
-    actions: [{ "22-03-2022": "skip" }],
-  },
-];
-
 export default function ActionAreaCard() {
   const [open, setOpen] = React.useState("");
+  const [habits, setHabits] = React.useState<habit[]>([]);
   const { authUser } = useUser();
+
+  const saveHabit = async (newHabit: habit) => {
+    setHabits((oldHabits) => [...oldHabits, newHabit]);
+    const { data, error: createError } = await supabase
+      .from("userProfiles")
+      .update({ habits: JSON.stringify([...habits, newHabit]) })
+      .match({ id: authUser?.id });
+  };
+
+  const fetchHabits = async () => {
+    const { data, error } = await supabase
+      .from("userProfiles")
+      .select()
+      .eq("id", authUser?.id);
+    if (data) {
+      const habits = JSON.parse(data[0].habits) as habit[];
+      setHabits(habits);
+      console.log(habits);
+    }
+  };
+  React.useEffect(() => {
+    fetchHabits();
+  }, []);
 
   if (process.env.NODE_ENV !== "development")
     return (
@@ -92,7 +98,7 @@ export default function ActionAreaCard() {
             </b>
           </Typography>
         </Grid>
-        <Dialog />
+        <Dialog setHabits={saveHabit} />
       </Container>
     );
   return (
@@ -113,11 +119,9 @@ export default function ActionAreaCard() {
               <IconButton>
                 <ChevronLeftIcon />
               </IconButton>
-
               <IconButton>
                 <ChevronRightIcon />
               </IconButton>
-
               <b>Mon, 21/3 - Sun, 26/3</b>
             </Typography>
             <LinearProgress
@@ -136,6 +140,7 @@ export default function ActionAreaCard() {
               </Typography>
             </Box>
             <Table
+              habits={habits}
               onClick={(rowName: string) => {
                 setOpen(rowName);
               }}
@@ -154,7 +159,7 @@ export default function ActionAreaCard() {
           </Grid>
         </Grid>
       </PanelBody>
-      <Dialog />
+      <Dialog setHabits={saveHabit} />
     </Container>
   );
 }
