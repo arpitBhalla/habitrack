@@ -8,16 +8,21 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import List from "./DragList";
+import Dialog from "./Dialog";
+import { Task } from "@type/Task";
 
 function Home() {
+  const [tasks, setTasks] = useState<Task[]>([]);
+  console.log(tasks);
   return (
     <>
       <Container maxWidth="xl">
         <Typography variant="h4" color="initial">
           <b>Tasks</b>
         </Typography>
-        <List />
+        <List {...{ tasks, setTasks }} />
       </Container>
+      <Dialog setTasks={setTasks} />
     </>
   );
 }

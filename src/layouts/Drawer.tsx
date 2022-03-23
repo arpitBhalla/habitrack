@@ -152,7 +152,11 @@ export default function MiniDrawer(props: any) {
         open={open}
       >
         <DrawerHeader>
-          <Avatar alt="Remy Sharp" src="/images/man.png" />
+          <Avatar
+            alt="Remy Sharp"
+            sx={{ height: 30, width: 30, mr: "4px" }}
+            src="/images/logo.png"
+          />
         </DrawerHeader>
 
         <List sx={{ flexGrow: 1 }}>
@@ -208,9 +212,9 @@ const links: LinkT[] = [
     Icon: DashboardOutlinedIcon,
   },
   {
-    path: "/explore",
-    name: "Explore",
-    Icon: ExploreOutlinedIcon,
+    path: "/tasks",
+    name: "Work To Do",
+    Icon: TaskAltIcon,
   },
   {
     path: "/pomodoro",
@@ -218,14 +222,14 @@ const links: LinkT[] = [
     Icon: SpaOutlinedIcon,
   },
   {
-    path: "/tasks",
-    name: "Work To Do",
-    Icon: TaskAltIcon,
-  },
-  {
     path: "/social",
     name: "Leaderboard",
     Icon: WorkspacePremiumOutlinedIcon,
+  },
+  {
+    path: "/explore",
+    name: "Explore",
+    Icon: ExploreOutlinedIcon,
   },
   {
     path: "/profile",

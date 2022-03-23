@@ -52,8 +52,8 @@ export default function ActionAreaCard() {
       </Grid>
       <Grid item md={4}>
         <Card
-          title="Level"
-          number={"Noob"}
+          title="Pending Tasks"
+          number={"4 "}
           description={"You've been working hard today!"}
           Icon={WorkspacePremiumOutlinedIcon}
           color="#F03E3E"

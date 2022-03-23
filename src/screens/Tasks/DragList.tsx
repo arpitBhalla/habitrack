@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
 import styled from "@emotion/styled";
 import { DragDropContext } from "react-beautiful-dnd";
-import DraggableElement from "./DragElm";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import { Droppable, Draggable } from "react-beautiful-dnd";
+import Typography from "@mui/material/Typography";
 
 const DragDropContextContainer = styled.div`
   padding: 20px;
   border-radius: 6px;
-`;
-
-const ListGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 8px;
 `;
 
 // fake data generator
@@ -82,18 +80,73 @@ function DragList() {
   return (
     <DragDropContextContainer>
       <DragDropContext onDragEnd={onDragEnd}>
-        <ListGrid>
+        <Grid container spacing={3}>
           {lists.map((listKey) => (
-            <DraggableElement
-              elements={elements[listKey]}
-              key={listKey}
-              prefix={listKey}
-            />
+            <Grid xs={12} md={6} item key={listKey}>
+              <DraggableElement elements={elements[listKey]} prefix={listKey} />
+            </Grid>
           ))}
-        </ListGrid>
+        </Grid>
       </DragDropContext>
     </DragDropContextContainer>
   );
 }
 
 export default DragList;
+
+const DroppableStyles = styled.div`
+  padding: 10px;
+  border-radius: 6px;
+  background: #eee;
+`;
+
+const DraggableElement = ({ prefix, elements }) => (
+  <DroppableStyles>
+    <Typography
+      sx={{ textTransform: "uppercase" }}
+      variant="body1"
+      color="text.secondary"
+    >
+      <b>{prefix}</b>
+    </Typography>
+    <Droppable droppableId={`${prefix}`}>
+      {(provided) => (
+        <div {...provided.droppableProps} ref={provided.innerRef}>
+          {elements.map((item, index) => (
+            <ListItem key={item.id} item={item} index={index} />
+          ))}
+          {provided.placeholder}
+        </div>
+      )}
+    </Droppable>
+  </DroppableStyles>
+);
+
+const ListItem = ({ item, index }: any) => {
+  const randomHeader = React.useMemo(() => `lorem.generateWords(5)`, []);
+
+  return (
+    <Draggable draggableId={item.id} index={index}>
+      {(provided, snapshot) => {
+        return (
+          <div
+            ref={provided.innerRef}
+            snapshot={snapshot}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <Card sx={{ p: 2, m: 1 }}>
+              <Typography variant="body1" color="">
+                <b>{randomHeader}</b>
+              </Typography>
+              <span>Content</span>
+              <div>
+                <span>{item.content}</span>
+              </div>
+            </Card>
+          </div>
+        );
+      }}
+    </Draggable>
+  );
+};
