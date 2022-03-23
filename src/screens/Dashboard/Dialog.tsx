@@ -30,7 +30,7 @@ export default function FormDialog() {
 
   return (
     <div>
-      <Box sx={{ position: "fixed", bottom: 18, right: 18 }}>
+      <Box sx={{ position: "fixed", bottom: 18, right: 18, zIndex: 1000 }}>
         <Fab
           onClick={handleClickOpen}
           variant="extended"

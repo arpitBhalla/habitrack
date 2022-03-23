@@ -17,6 +17,8 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import dynamic from "next/dynamic";
 import { useUser } from "@context/Auth";
+import { supabase } from "@utils/supabaseClient";
+import Stats from "./Stats";
 
 const Chart = dynamic(() => import("./chart"), {
   ssr: false,
@@ -34,35 +36,7 @@ export default function ActionAreaCard() {
         <b>6hr 12 min till bedtime</b>
       </Typography>
       <PanelBody open={open} setOpen={setOpen}>
-        <Grid container spacing={3}>
-          <Grid item md={4}>
-            <Card
-              title="Day Streak"
-              number={"5 days"}
-              description={"You've been working hard today!"}
-              Icon={WhatshotOutlinedIcon}
-              color="#F76707"
-            />
-          </Grid>
-          <Grid item md={4}>
-            <Card
-              title="Points"
-              number={1040}
-              description={"Rank 34 among 89 users"}
-              Icon={ControlPointDuplicateIcon}
-              color="#1C7ED6"
-            />
-          </Grid>
-          <Grid item md={4}>
-            <Card
-              title="Level"
-              number={"Noob"}
-              description={"You've been working hard today!"}
-              Icon={WorkspacePremiumOutlinedIcon}
-              color="#F03E3E"
-            />
-          </Grid>
-        </Grid>
+        <Stats />
         <Grid sx={{ mt: 2 }} container spacing={3}>
           <Grid item md={8}>
             <Typography variant="h6" color="text.secondary">

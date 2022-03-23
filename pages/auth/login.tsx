@@ -11,7 +11,6 @@ import Image from "next/image";
 import Grid from "@mui/material/Grid";
 import dynamic from "next/dynamic";
 import Logo from "@components/global/Logo";
-import { css } from "@emotion/react";
 
 const Profile = dynamic(() => import("@screens/Profile"));
 
@@ -26,16 +25,16 @@ const Login: NextPage = () => {
     <Container>
       <Toolbar></Toolbar>
       <Grid container spacing={0} alignItems="center">
-        <Grid item lg={3} md={2} sm={false}>
-          {/* <Image
+        <Grid item lg={6} md={2} sm={false}>
+          <Image
             src="/images/illustration_login.png"
             width={500}
             height={400}
-          /> */}
+          />
         </Grid>
         <Grid item md={5} xs={12}>
           <Box
-            p={2}
+            p={4}
             display={"flex"}
             flexDirection={"column"}
             alignItems="center"
@@ -45,7 +44,6 @@ const Login: NextPage = () => {
             }}
           >
             <Logo size={65} />
-            <Profile />
             <Box p={3}></Box>
             <Button
               onClick={handleLogin}

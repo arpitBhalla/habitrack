@@ -72,7 +72,7 @@ export default function ActionAreaCard(props: CardProps) {
           component="div"
         >
           <b>
-            {typeof props.number === "number"
+            {Number.isFinite(Number(props.number))
               ? Number(props.number).toLocaleString()
               : props.number}
           </b>

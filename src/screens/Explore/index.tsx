@@ -50,10 +50,10 @@ export default function ImgMediaCard() {
 
   return (
     <>
-      <Typography variant="h4" color="initial">
-        <b>Explore</b>
-      </Typography>
       <Container maxWidth="md">
+        <Typography sx={{ mb: 2 }} variant="h4" color="initial">
+          <b>Explore</b>
+        </Typography>
         <Grid container spacing={2}>
           {/* <Grid item xs={12}>
             <CardWrapper>

@@ -12,22 +12,27 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { supabase } from "@utils/supabaseClient";
 import { useUser } from "@context/Auth";
+import { useRouter } from "next/router";
 
 export default function ProfileCard() {
   const { authUser } = useUser();
   const [name, setName] = React.useState(authUser?.user_metadata.name);
   const [email, setEmail] = React.useState(authUser?.email);
 
-  const [profession, setProfession] = React.useState("");
-  const [gender, setGender] = React.useState("");
-  const [age, setAge] = React.useState("");
+  const [profession, setProfession] = React.useState(
+    authUser?.user_metadata.profession || ""
+  );
+  const [gender, setGender] = React.useState(
+    authUser?.user_metadata.gender || ""
+  );
+  const [age, setAge] = React.useState(authUser?.user_metadata.age || "");
+  const router = useRouter();
 
   async function submitForm() {
-    return console.log({ name, email, profession, gender, age });
-
-    const { user, error } = await supabase.auth.signIn({
-      email: "example@email.com",
+    const { user, error } = await supabase.auth.update({
+      data: { name, email, profession, gender, age, acc: true },
     });
+    if (user) router.push("/");
   }
   return (
     <Container maxWidth="sm">
@@ -107,7 +112,7 @@ export default function ProfileCard() {
             variant="contained"
             color="primary"
           >
-            Continue
+            Save
           </Button>
         </Grid>
       </Grid>

@@ -3,7 +3,6 @@ import { supabase } from "@utils/supabaseClient";
 import { useRouter } from "next/router";
 import Drawer from "@layouts/Drawer";
 import React from "react";
-import Box from "@mui/material/Box";
 
 type TUserRole = {};
 const basePath = "/";
@@ -59,11 +58,16 @@ export const WithProtectedPage =
     const [loading, setLoading] = React.useState(true);
     React.useEffect(() => {
       const isLoggedIn = Boolean(authUser);
+      const isAccDone = Boolean(authUser?.user_metadata?.acc);
+      console.log({ isAccDone });
       if (!isLoggedIn && nonAuthPage) {
         return setLoading(false);
       }
       if (isLoggedIn) {
-        if (nonAuthPage) {
+        if (!isAccDone) {
+          router.push(basePath + "auth/profile");
+          setLoading(false);
+        } else if (nonAuthPage) {
           router.push(`${basePath}`);
         } else {
           setLoading(false);
