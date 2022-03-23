@@ -10,11 +10,6 @@ import { useRouter } from "next/router";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import StaticDatePicker from "@mui/lab/StaticDatePicker";
-
 import {
   BarChart,
   Bar,
@@ -161,22 +156,8 @@ export default function PersistentDrawerRight({
             <Card title={"0 day"} caption={"Total"} />
           </Grid>
           <Grid item xs={12}>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <StaticDatePicker
-                displayStaticWrapperAs="desktop"
-                // openTo="year"
-                // value={value}
-                onChange={(newValue) => {
-                  // setValue(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-          </Grid>
-          <Grid item xs={12}>
             <BarChart width={250} height={180} data={data}>
-              <Bar dataKey="uv" fill={theme.palette.primary.main} />
-              <Tooltip />
+              <Bar dataKey="uv" fill="#8884d8" />
             </BarChart>
           </Grid>
         </Grid>

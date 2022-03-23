@@ -10,22 +10,27 @@ import CelebrationOutlinedIcon from "@mui/icons-material/CelebrationOutlined";
 import WhatshotOutlinedIcon from "@mui/icons-material/WhatshotOutlined";
 import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
 import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import LinearProgress from "@mui/material/LinearProgress";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import dynamic from "next/dynamic";
 
+const Chart = dynamic(() => import("./chart"), {
+  ssr: false,
+});
 export default function ActionAreaCard() {
   const [open, setOpen] = React.useState("");
 
   return (
     <Container maxWidth="xl">
+      <Typography variant="h4" color="initial">
+        <b>Good Morning, Arpit</b>
+      </Typography>
+      <Typography sx={{ p: 1 }} variant="body1" color="text.secondary">
+        <b>6hr 12 min till bedtime</b>
+      </Typography>
       <PanelBody open={open} setOpen={setOpen}>
         <Grid container spacing={3}>
           <Grid item md={4}>
@@ -58,6 +63,32 @@ export default function ActionAreaCard() {
         </Grid>
         <Grid sx={{ mt: 2 }} container spacing={3}>
           <Grid item md={8}>
+            <Typography variant="h6" color="text.secondary">
+              <IconButton>
+                <ChevronLeftIcon />
+              </IconButton>
+
+              <IconButton>
+                <ChevronRightIcon />
+              </IconButton>
+
+              <b>Mon, 21/3 - Sun, 26/3</b>
+            </Typography>
+            <LinearProgress
+              sx={{ height: 8, m: 1, borderRadius: 8 }}
+              variant="determinate"
+              value={45}
+            />
+            <Box
+              sx={{ display: "flex", m: 1, justifyContent: "space-between" }}
+            >
+              <Typography variant="caption" color="text.secondary">
+                <b>33% since last week</b>
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                <b>45% achieved</b>
+              </Typography>
+            </Box>
             <Table
               onClick={(rowName: string) => {
                 setOpen(rowName);
@@ -66,31 +97,12 @@ export default function ActionAreaCard() {
           </Grid>
           <Grid item md={4}>
             <CardWrapper>
+              {/* <Typography sx={{ m: 2 }} variant="body2" color="text.secondary">
+                <b>Progress</b>
+              </Typography> */}
+
               <Box p={2}>
-                <LineChart
-                  width={350}
-                  height={200}
-                  data={data}
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  {/* <XAxis dataKey="name" />
-                  <YAxis /> */}
-                  {/* <Tooltip />
-                  <Legend /> */}
-                  <Line
-                    type="monotone"
-                    dataKey="pv"
-                    stroke="#8884d8"
-                    activeDot={{ r: 8 }}
-                  />
-                  <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-                </LineChart>
+                <Chart />
               </Box>
             </CardWrapper>
           </Grid>
@@ -100,35 +112,3 @@ export default function ActionAreaCard() {
     </Container>
   );
 }
-const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-];

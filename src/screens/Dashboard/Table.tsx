@@ -10,6 +10,7 @@ import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { CardWrapper } from "@components/global/Card";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 function createData(
   name: string,
@@ -43,7 +44,7 @@ export default function BasicTable(props: any) {
   return (
     <CardWrapper>
       <TableContainer component={Paper}>
-        <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell align="center">Habit</TableCell>
