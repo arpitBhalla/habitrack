@@ -22,7 +22,7 @@ export default function ActionAreaCard() {
   const [userData, setUserData] = React.useState({});
   const fetchUsers = async () => {
     const { data, error } = await supabase
-      .from("users")
+      .from("userProfiles")
       .select()
       .eq("id", authUser?.id);
     if (data) setUserData(data[0]);

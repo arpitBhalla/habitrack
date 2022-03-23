@@ -228,11 +228,11 @@ const links: LinkT[] = [
     name: "Work To Do",
     Icon: TaskAltIcon,
   },
-  // {
-  //   path: "/social",
-  //   name: "Leaderboard",
-  //   Icon: PermIdentityOutlinedIcon,
-  // },
+  {
+    path: "/social",
+    name: "Leaderboard",
+    Icon: PermIdentityOutlinedIcon,
+  },
   {
     path: "/profile",
     name: "Profile",

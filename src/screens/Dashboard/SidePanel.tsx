@@ -14,6 +14,10 @@ import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import StaticDatePicker from "@mui/lab/StaticDatePicker";
+import WhatshotOutlinedIcon from "@mui/icons-material/WhatshotOutlined";
+
+import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 
 import {
   BarChart,
@@ -30,48 +34,13 @@ import {
 const drawerWidth = 350;
 
 const data = [
-  {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
+  { name: "M", avg: 3 },
+  { name: "T", avg: 2 },
+  { name: "W", avg: 3 },
+  { name: "T", avg: 4 },
+  { name: "F", avg: 5 },
+  { name: "S", avg: 3 },
+  { name: "S", avg: 2 },
 ];
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -146,13 +115,21 @@ export default function PersistentDrawerRight({
         </Box>
         <Grid sx={{ p: 2 }} container spacing={2}>
           <Grid item xs={12}>
-            <Card title={"0 day"} caption={"Current Streak"} />
+            <Card
+              title={"0 day"}
+              caption={"Current Streak"}
+              Icon={WhatshotOutlinedIcon}
+            />
           </Grid>
           <Grid item xs={12} md={6}>
-            <Card title={"0 day"} caption={"Complete"} />
+            <Card
+              title={"0 day"}
+              caption={"Complete"}
+              Icon={DoneOutlinedIcon}
+            />
           </Grid>
           <Grid item xs={12} md={6}>
-            <Card title={"0 day"} caption={"Failed"} />
+            <Card title={"0 day"} caption={"Failed"} Icon={CloseIcon} />
           </Grid>
           <Grid item xs={12} md={6}>
             <Card title={"0 day"} caption={"Skipped"} />
@@ -174,9 +151,12 @@ export default function PersistentDrawerRight({
             </LocalizationProvider>
           </Grid>
           <Grid item xs={12}>
-            <BarChart width={250} height={180} data={data}>
-              <Bar dataKey="uv" fill={theme.palette.primary.main} />
+            <BarChart width={280} height={180} data={data}>
+              <Bar dataKey="avg" fill={theme.palette.primary.main} />
               <Tooltip />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Legend key="avg" />
             </BarChart>
           </Grid>
         </Grid>
@@ -185,17 +165,22 @@ export default function PersistentDrawerRight({
   );
 }
 
-const Card = ({ children, title, caption }: any) => {
+const Card = ({ children, title, caption, Icon }: any) => {
   return (
     <Box sx={{ border: "1px solid #ccc", p: 1, pl: 2, borderRadius: 1 }}>
       <Typography
         variant="caption"
-        sx={{ textTransform: "uppercase" }}
+        sx={{
+          textTransform: "uppercase",
+          display: "flex",
+          alignItems: "center",
+        }}
         color="text.secondary"
       >
+        {Icon && <Icon sx={{ fontSize: "18px" }} color="action" />}
         <b>{caption}</b>
       </Typography>
-      <Typography variant="body1" color="text.primary">
+      <Typography sx={{ pl: "4px" }} variant="body1" color="text.primary">
         <b>{title}</b>
       </Typography>
       {children}

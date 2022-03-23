@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     <Container>
       <Toolbar></Toolbar>
       <Grid container spacing={0} alignItems="center">
-        <Grid item lg={3} md={2} sm={false}></Grid>
+        <Grid item lg={3} md={3} sm={false}></Grid>
         <Grid item md={5} xs={12}>
           <Box
             p={2}

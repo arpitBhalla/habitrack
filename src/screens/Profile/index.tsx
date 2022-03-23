@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 
 export default function ProfileCard() {
   const { authUser } = useUser();
-  const [name, setName] = React.useState(authUser?.user_metadata.name);
+  const [name, setName] = React.useState(authUser?.user_metadata.full_name);
   const [email, setEmail] = React.useState(authUser?.email);
 
   const [profession, setProfession] = React.useState(
@@ -29,8 +29,13 @@ export default function ProfileCard() {
   const router = useRouter();
 
   async function submitForm() {
+    if (!authUser?.user_metadata.acc) {
+      const { data, error: createError } = await supabase
+        .from("userProfiles")
+        .insert([{ streak: "0", points: 0 }]);
+    }
     const { user, error } = await supabase.auth.update({
-      data: { name, email, profession, gender, age, acc: true },
+      data: { full_name: name, email, profession, gender, age, acc: true },
     });
     if (user) router.push("/");
   }
@@ -42,7 +47,7 @@ export default function ProfileCard() {
             margin="dense"
             size="small"
             fullWidth
-            label="First Name"
+            label="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />

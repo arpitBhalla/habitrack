@@ -2,11 +2,7 @@ import { Droppable } from "react-beautiful-dnd";
 import ListItem from "./ListItem";
 import React from "react";
 import styled from "@emotion/styled";
-
-const ColumnHeader = styled.div`
-  text-transform: uppercase;
-  margin-bottom: 20px;
-`;
+import Typography from "@mui/material/Typography";
 
 const DroppableStyles = styled.div`
   padding: 10px;
@@ -16,7 +12,13 @@ const DroppableStyles = styled.div`
 
 const DraggableElement = ({ prefix, elements }) => (
   <DroppableStyles>
-    <ColumnHeader>{prefix}</ColumnHeader>
+    <Typography
+      sx={{ textTransform: "uppercase" }}
+      variant="body1"
+      color="initial"
+    >
+      {prefix}
+    </Typography>
     <Droppable droppableId={`${prefix}`}>
       {(provided) => (
         <div {...provided.droppableProps} ref={provided.innerRef}>

@@ -10,6 +10,7 @@ import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { CardWrapper } from "@components/global/Card";
 import Box from "@mui/material/Box";
+import { supabase } from "@utils/supabaseClient";
 
 function createData(name: string, points: number, rank: number) {
   return {
@@ -26,6 +27,16 @@ const rows = [
 ];
 
 export default function BasicTable(props: any) {
+  const fetchUsers = async () => {
+    const { data, error } = await supabase
+      .from("users")
+      .select("*, users!inner(*)");
+    console.log(data);
+  };
+  React.useEffect(() => {
+    fetchUsers();
+  }, []);
+
   return (
     <CardWrapper>
       <TableContainer component={Paper}>
