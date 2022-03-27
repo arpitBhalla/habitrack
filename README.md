@@ -4,4 +4,4 @@ An all in one ap to track your habits and help build good habits and break bad o
 
 ## Preview
 
-![Screenshot from 2022-03-23 17-13-16](https://user-images.githubusercontent.com/55053424/159691878-af968b12-3a87-4000-ae41-e46c983bb0a6.png)
+![Preview](https://user-images.githubusercontent.com/55053424/160281995-83a3f29a-16d0-467e-9d5f-4dd50b4f1c7b.gif)
