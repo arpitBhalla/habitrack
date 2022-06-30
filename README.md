@@ -4,11 +4,22 @@ An all in one ap to track your habits and help build good habits and break bad o
 
 ## SIH 2022 Grand Finale
 
-|Team Name| Code Chronicles|
-|--|--|
-|Teck Stack|NextJS, Supabase|
-|Team Members| Arpit Bhalla (Leader), Devyansh, Mehul, Akshat, Karan, Kashish|
-|Problem Statement Code | KH1160|
+<table>
+<tr> 
+<td> Team Name
+<td> CodeChronicles
+<tr>
+<td> Tech Stack
+<td> NextJS, Supabase
+<tr>
+<td> Problem Statement Code 
+<td> KH1160
+<tr>
+<td> Team Members
+<td> Arpit Bhalla (Leader), Devyansh, Mehul, Akshat, Karan, Kashish
+</table>
+
+
 
 
 ## Preview
