@@ -1,6 +1,6 @@
 # Habitrack
 
-An all in one ap to track your habits and help build good habits and break bad ones
+An all in one app to track your habits and help build good habits and break bad ones
 
 ## SIH 2022 Grand Finale
 
