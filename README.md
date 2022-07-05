@@ -16,7 +16,7 @@ An all in one app to track your habits and help build good habits and break bad 
 <td> KH1160
 <tr>
 <td> Team Members
-<td> Arpit Bhalla (Leader), Devyansh, Mehul, Akshat, Karan, Kashish
+<td> Arpit Bhalla (Leader), Aarushi, Mehul, Akshat, Karan, Kashish
 </table>
 
 <!--
