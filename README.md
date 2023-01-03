@@ -40,6 +40,8 @@ An all in one app to track your habits and help build good habits and break bad 
 <tr>
 <td> <img src='assets/preview03.png'>
 <td> <img src='assets/preview04.png'>
+</table>
+
 
 ## Preview v1
 
